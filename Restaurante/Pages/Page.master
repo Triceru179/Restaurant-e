@@ -1,0 +1,252 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Page.master.cs" Inherits="Pages_Page" %>
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo-claro.png" />
+
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="/Content/jquery.mCustomScrollbar.min.css"/>
+    <link href="/Content/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/Content/Pages.css" />
+
+    <script src="/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="/Scripts/popper.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/Chart.min.js"></script>
+
+    <script src="/Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/Scripts/jquery.dataTables.min.js"></script>
+    <script src="/Scripts/Pages.js"></script>
+
+    <title> <%: Page.Title %> ~ Restaurant-e </title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="overlay"></div> <%-- utilizado para deixar a tela escura --%>
+
+        <nav id="sidebar"> <%-- menu lateral --%>
+            <div class="sidebar-header">
+                <div class="h5 py-0">
+                    <img src="/images/logo-claro.png" width="45" height="45" alt="" class="img-fluid">
+                    <label>R-e</label>
+                </div>
+                <button type="button" class="close" aria-label="Close" ID="dismiss"> <%-- botão para fechar menu lateral --%>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <ul class="list-unstyled components">
+                <hr />
+                <li>
+                    <a>
+                        <img src="/icons/profile.svg" width="35" class="mb-2 mr-2"/>
+                        <% Response.Write(Session["nome"]); %>
+                    </a>
+                </li>
+                <hr />
+
+                <li>
+                    <a href="/Pages/">
+                        <img src="/icons/home.svg" width="28" class="mb-2 mr-2"/>
+                        Página inicial
+                    </a>
+                </li>
+
+                <%-- Ativa os botões de navegação de acordo com a permissão do usuário --%>
+
+                <% if ((perm & Permissoes.admin) != 0 || (perm & Permissoes.founder) != 0)
+                    {%>
+                <li>
+                    <a href="#dashboardMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <img src="/icons/dashboard.svg" width="28" class="mb-2 mr-2"/>
+                        Relatórios
+                    </a>
+                    <ul class="collapse list-unstyled" id="dashboardMenu">
+                        <li>
+                            <a href="/Pages/relatorio/Dashboard.aspx">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Pages/relatorio/RelatorioComanda.aspx">
+                                Relatórios de comanda
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Pages/relatorio/RelatorioProduto.aspx">
+                                Relatórios de produtos
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <% } %>
+
+                <% if ((perm & Permissoes.admin) != 0 || (perm & Permissoes.founder) != 0)
+                    {%>
+                <li>
+                    <a href="#adminMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <img src="/icons/admin.svg" width="28" class="mb-2 mr-2"/>
+                        Administrador
+                    </a>
+                    <ul class="collapse list-unstyled" id="adminMenu">
+                        <li>
+                            <a href="/Pages/admin/Funcionario.aspx">
+                                Gerenciar funcionários
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Pages/admin/Historico.aspx">
+                                Histórico
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Pages/admin/GerenciarReclamacao.aspx">
+                                Visualizar reclamações
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <% } %>
+
+                <% if ((perm & Permissoes.gerente) != 0 || (perm & Permissoes.founder) != 0)
+                    {%>
+                <li>
+                    <a href="#gerenteMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <img src="/icons/gerente.svg" width="28" class="mb-2 mr-2"/>
+                        Gerente
+                    </a>
+                    <ul class="collapse list-unstyled" id="gerenteMenu">
+                        <li>
+                            <a href="/Pages/gerente/Reclamacao.aspx">
+                                Registrar reclamações
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Pages/gerente/cardapio.aspx">
+                                Gerenciar cardápio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Pages/gerente/GerenciarMesas.aspx">
+                                Gerenciar mesas
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <% } %>
+
+                <% if ((perm & Permissoes.garcom) != 0 || (perm & Permissoes.founder) != 0)
+                    {%>
+                <li>
+                    <a href="#garcomMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <img src="/icons/garcom.svg" width="28" class="mb-2 mr-2"/>
+                        Garçom
+                    </a>
+                    <ul class="collapse list-unstyled" id="garcomMenu">
+                        <li>
+                            <a href="/Pages/garcom/VerProduto.aspx">
+                                Visualizar cardápio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Pages/garcom/Mesas.aspx">
+                                Seleção de mesa
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <% } %>
+
+                <% if ((perm & Permissoes.cozinha) != 0 || (perm & Permissoes.founder) != 0)
+                    {%>
+                <li>
+                    <a href="#CozinhaMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <img src="/icons/cozinha.svg" width="28" class="mb-2 mr-2"/>
+                        Cozinha
+                    </a>
+                    <ul class="collapse list-unstyled" id="CozinhaMenu">
+                        <li>
+                            <a href="/Pages/cozinha/PedidoPendente.aspx">
+                                Pedidos pendentes
+                            </a>
+                        </li>
+                        <!--li>
+                            <a href="/Pages/cozinha/HistoricoPedido.aspx">
+                                Histórico de pedidos
+                            </a>
+                        </li-->
+                    </ul>
+                </li>
+                <% } %>
+
+                <% if ((perm & Permissoes.caixa) != 0 || (perm & Permissoes.founder) != 0)
+                    {%>
+                <li>
+                    <a href="#CaixaMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <img src="/icons/caixa.svg" width="28" class="mb-2 mr-2"/>
+                        Caixa
+                    </a>
+                    <ul class="collapse list-unstyled" id="CaixaMenu">
+                        <li>
+                            <a href="/Pages/caixa/PagamentoPendente.aspx">
+                                Pagamentos pendentes
+                            </a>
+                        </li>
+                        <!--li>
+                            <a href="/Pages/caixa/HistoricoPagamento.aspx">
+                                Histórico de pagamento
+                            </a>
+                        </li-->
+                    </ul>
+                </li>
+                <% } %>
+
+                <hr />
+                <%-- botão sair // retornar a tela de login --%>
+                <li class="mb-3">
+                    <asp:LinkButton runat="server" onclick="btnSair_Click">
+                        <img src="/icons/logout.svg" width="28" class="mb-2 mr-2"/>
+                        Sair
+                    </asp:LinkButton>
+                </li>
+            </ul>
+        </nav>
+        <div id="content">
+            <%-- Navbar // menu superior --%>
+            <nav class="navbar bg-primary n fixed-top">
+                <div class="container-fluid">
+                    <%-- botão para abrir menu --%>
+                    <button class="btn btn-outline-light" type="button" id="sidebarCollapse">
+                        ☰
+                    </button>
+                    <div class="pl-3"></div>
+                    <%-- adiciona o título da página ao menu superior, indicando a página atual --%>
+                    <span class="text-light navbar-brand"> <%: Page.Title %> </span>
+                </div>
+            </nav>
+        </div>
+
+        <asp:ContentPlaceHolder ID="Menu" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <div class="container container-fluid" style="padding-top: 80px;">
+            <%-- conteúdo do body // página filha sendo importada --%>
+            <asp:ContentPlaceHolder ID="Body" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <div class="my-5"></div>
+        <div class="footer d-none d-md-block">
+            <span>
+                © 2020 - Restaurant-e
+            </span>
+        </div>
+
+    </form>
+</body>
+</html>

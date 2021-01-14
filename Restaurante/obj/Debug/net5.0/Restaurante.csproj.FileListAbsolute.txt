@@ -1,0 +1,5 @@
+C:\Users\victo\Documents\Programação\Git\Restaurant-e\Restaurante\obj\Debug\net5.0\Restaurante.csprojAssemblyReference.cache
+C:\Users\victo\Documents\Programação\Git\Restaurant-e\Restaurante\obj\Debug\net5.0\Restaurante.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\victo\Documents\Programação\Git\Restaurant-e\Restaurante\obj\Debug\net5.0\Restaurante.AssemblyInfoInputs.cache
+C:\Users\victo\Documents\Programação\Git\Restaurant-e\Restaurante\obj\Debug\net5.0\Restaurante.AssemblyInfo.cs
+C:\Users\victo\Documents\Programação\Git\Restaurant-e\Restaurante\obj\Debug\net5.0\Restaurante.csproj.CoreCompileInputs.cache
