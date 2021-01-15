@@ -30,7 +30,7 @@ A ideia do Restaurant-e é agilizar os processos de comanda e auxiliar na quest�
 
 ### Instruções e Demonstração
 
-
+Para aqueles que não querer executar localmente, este vídeo mostra o software e um pouco de seu planejamento e conceito:
 [Apresentação final do projeto](https://youtu.be/vPpbtt40v_Y)
 
 (forma recomendada) Para executar localmente:
